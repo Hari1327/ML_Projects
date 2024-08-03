@@ -1,50 +1,14 @@
-import pickle
-import pandas as pd
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.model_selection import train_test_split
-import nltk
-from nltk import word_tokenize
-import re
+import streamlit as st
 
-# Load the logistic regression model
-with open('logistic_regression_model.pkl', 'rb') as file:
-    logistic_model = pickle.load(file)
+st. header("Twitter Comment Sentiment Analysis")
 
-# Sample new data
-new_data = ["I'm tired and finished playing this borderland.", "Another example of a tweet."]
+page_bg_img = '''
+<style>
+body {
+background-image: url();
+background-size: cover;
+}
+</style>
+'''
 
-# Preprocess the new data
-def preprocess(text):
-    text = text.lower()
-    text = re.sub('[^A-Za-z0-9 ]+', ' ', text)
-    return text
-
-new_data = [preprocess(text) for text in new_data]
-
-# Transform the new data using CountVectorizer
-# Make sure to use the same vectorizer fitted on the training data
-bow_counts = CountVectorizer(
-    tokenizer=word_tokenize,
-    stop_words=nltk.corpus.stopwords.words('english'),
-    ngram_range=(1, 4)
-)
-
-reviews_train =  pd.read_csv("twitter_training.csv")
-reviews_train.columns = ['id', 'information', 'type', 'text']
-
-reviews_train["lower"]=reviews_train.text.str.lower() #lowercase
-reviews_train["lower"]=[str(data) for data in reviews_train.lower] #converting all to string
-reviews_train["lower"]=reviews_train.lower.apply(lambda x: re.sub('[^A-Za-z0-9 ]+', ' ', x)) #regex
-
-#train data spilt
-
-reviews_train, reviews_test = train_test_split(reviews_train,test_size=0.2, random_state = 42)
-# Assuming `reviews_train` is available from the training phase
-X_train_bow = bow_counts.fit_transform(reviews_train.lower)
-
-# Transform the new data
-X_new_data_bow = bow_counts.transform(new_data)
-
-# Make predictions using logistic regression
-logistic_predictions = logistic_model.predict(X_new_data_bow)
-print("Logistic Regression Predictions:", logistic_predictions)
+st.markdown(page_bg_img, unsafe_allow_html=True)
