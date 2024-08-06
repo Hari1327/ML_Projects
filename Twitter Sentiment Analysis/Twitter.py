@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 import nltk
 from nltk.tokenize import word_tokenize
 import re
+import base64
 
 # Download NLTK data
 nltk.download('punkt')
@@ -14,16 +15,28 @@ nltk.download('stopwords')
 # Streamlit UI
 st.header("Twitter Comment Sentiment Analysis")
 
-page_bg_img = '''
-<style>
-body {
-background-image: url();
-background-size: cover;
-}
-</style>
-'''
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode('utf-8')
 
-st.markdown(page_bg_img, unsafe_allow_html=True)
+base64_image = get_base64_image("bg.png")
+
+# Create CSS with the base64 image
+background_css = f"""
+<style>
+body {{
+    background-image: url('data:image/png;base64,{base64_image}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}}
+</style>
+"""
+
+# Apply the CSS
+st.markdown(background_css, unsafe_allow_html=True)
+
 user_input = st.text_input("Enter your comment here")
 
 with open('logistic_regression_model.pkl', 'rb') as file:
