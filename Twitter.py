@@ -35,7 +35,7 @@ st.header("Twitter Comment Sentiment Analysis")
 # """
 
 # Apply the CSS
-st.markdown(background_css, unsafe_allow_html=True)
+# st.markdown(background_css, unsafe_allow_html=True)
 
 user_input = st.text_input("Enter your comment here")
 
