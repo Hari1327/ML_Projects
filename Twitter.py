@@ -39,7 +39,7 @@ st.markdown(background_css, unsafe_allow_html=True)
 
 user_input = st.text_input("Enter your comment here")
 
-with open('logistic_regression_model.pkl', 'rb') as file:
+with open('Twitter Sentiment Analysis/logistic_regression_model.pkl', 'rb') as file:
     logistic_model = pickle.load(file)
 
 # Preprocess the new data
