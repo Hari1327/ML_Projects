@@ -58,7 +58,7 @@ bow_counts = CountVectorizer(
     ngram_range=(1, 4)
 )
 
-reviews_train =  pd.read_csv("twitter_training.csv")
+reviews_train =  pd.read_csv("Twitter Sentiment Analysis/twitter_training.csv")
 reviews_train.columns = ['id', 'information', 'type', 'text']
 
 reviews_train["lower"]=reviews_train.text.str.lower() #lowercase
