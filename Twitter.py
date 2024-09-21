@@ -15,24 +15,24 @@ nltk.download('stopwords')
 # Streamlit UI
 st.header("Twitter Comment Sentiment Analysis")
 
-def get_base64_image(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode('utf-8')
+# def get_base64_image(image_path):
+#     with open(image_path, "rb") as img_file:
+#         return base64.b64encode(img_file.read()).decode('utf-8')
 
-base64_image = get_base64_image("bg.png")
+# base64_image = get_base64_image("bg.png")
 
-# Create CSS with the base64 image
-background_css = f"""
-<style>
-body {{
-    background-image: url('data:image/png;base64,{base64_image}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}}
-</style>
-"""
+# # Create CSS with the base64 image
+# background_css = f"""
+# <style>
+# body {{
+#     background-image: url('data:image/png;base64,{base64_image}');
+#     background-size: cover;
+#     background-position: center;
+#     background-repeat: no-repeat;
+#     background-attachment: fixed;
+# }}
+# </style>
+# """
 
 # Apply the CSS
 st.markdown(background_css, unsafe_allow_html=True)
